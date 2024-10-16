@@ -1,4 +1,5 @@
 let cart = new Map();
+let cartTotal = 0;
 const mapTemplate = new Map([["name", ""], ["image", "img.png"], 
                     ["price", "$"], ["quantity", 0]]);
 
@@ -10,7 +11,13 @@ const cartBar = document.body.getElementsByClassName("cart-items")[0];
 // ^^^ test / temporary ^^^
 
 
-function makeInnerHTML(id) {
+function dollarToNum(price) 
+{
+    return Number(price.split("$").pop());
+}
+
+function makeInnerHTML(id) 
+{
     return `
         <div class="cart-row">
             <div class="cart-item cart-column">
@@ -20,19 +27,33 @@ function makeInnerHTML(id) {
             <span class="cart-price cart-column">` + cart.get(id).get("price") + `</span>
             <div class="cart-quantity cart-column">
                 <input class="cart-quantity-input" type="number" value="` + cart.get(id).get("quantity") + `">
-                <button class="btn btn-danger" type="button">REMOVE</button>
+                <button class="btn btn-danger" onclick="removeFromCart('` + id + `')" type="button">REMOVE</button>
             </div>
         </div>`;
 }
 
-function addCartDiv(id) {
+function removeFromCart(id) 
+{
+    document.getElementById(id).remove();
+    cart.delete(id);
+}
+
+function purchase() 
+{
+    document.getElementsByClassName("cart-items")[0].innerHTML = "";
+    cart = new Map();
+}
+
+function addCartDiv(id) 
+{
     let item =  document.createElement("div");
     item.id = id;
     item.innerHTML = makeInnerHTML(id);
     cartBar.appendChild(item);
 }
 
-function updateCartDiv(id) {
+function updateCartDiv(id) 
+{
     let div = document.getElementById(id);
     div.innerHTML = makeInnerHTML(id);
 }
@@ -45,7 +66,6 @@ function cartAdd(id, data)
 
     for (let index = 0; index < shopItems.length; index++)
     {
-        console.log(index);
         if (shopItems[index].getElementsByTagName("button")[0] == data)
             shopItem = shopItems[index];
     }
