@@ -5,8 +5,8 @@ const mapTemplate = new Map([["name", ""], ["image", "img.png"],
 const cartBar = document.body.getElementsByClassName("cart-items")[0];
 
 
-cart.set("coffee_cup", new Map([["name", "Coffee Cup"], ["image", "Images/Cofee.png"], 
-                    ["price", "$6.99"], ["quantity", 0]]));
+// cart.set("coffee_cup", new Map([["name", "Coffee Cup"], ["image", "Images/Cofee.png"], 
+//                     ["price", "$6.99"], ["quantity", 0]]));
 // ^^^ test / temporary ^^^
 
 
@@ -25,23 +25,33 @@ function makeInnerHTML(id) {
         </div>`;
 }
 
-function addCartDisplayItem(id) {
+function addCartDiv(id) {
     let item =  document.createElement("div");
     item.id = id;
     item.innerHTML = makeInnerHTML(id);
     cartBar.appendChild(item);
 }
 
-function updateCartDisplay() {
-
+function updateCartDiv(id) {
+    let div = document.getElementById(id);
+    div.innerHTML = makeInnerHTML(id);
 }
 
-function cartAdd(id) 
+function cartAdd(id, name, image, price, quantity) 
 {
     if (cart.has(id))
     {
-
+        cart.get(id).set("quantity", cart.get(id).get("quantity")+1);
+        updateCartDiv(id);
     }
-}
+    else
+    {
+        cart.set(id, mapTemplate);
+        cart.get(id).set("name", name);
+        cart.get(id).set("image", image);
+        cart.get(id).set("price", price);
+        cart.get(id).set("quantity", quantity);
+        addCartDiv(id);
+    }
 
-renderItem("coffee_cup");
+}
