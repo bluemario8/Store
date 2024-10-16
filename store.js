@@ -51,11 +51,12 @@ function cartAdd(id, data)
     }
     console.log(shopItem);
 
-    let oldText = shopItem.getElementsByClassName("shop-item-button")[0].innerText;
-
     if (cart.has(id))
     {
         shopItem.getElementsByClassName("shop-item-button")[0].innerText = "ALREADY IN CART";
+        setTimeout(() => { 
+            shopItem.getElementsByClassName("shop-item-button")[0].innerText = "ADD TO CART"; 
+                         }, 2000);
     }
     else
     {
