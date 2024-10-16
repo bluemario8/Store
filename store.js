@@ -37,8 +37,19 @@ function updateCartDiv(id) {
     div.innerHTML = makeInnerHTML(id);
 }
 
-function cartAdd(id, name, image, price, quantity) 
+function cartAdd(id, data) 
 {
+    console.log(data);
+    let shopItems = document.getElementsByClassName("shop-item");
+    let shopItem = "";
+    for (let index = 0; index < shopItems.length; index++)
+    {
+        console.log(index);
+        if (shopItems[index].getElementsByTagName("button")[0] == data)
+            shopItem = shopItems[index];
+    }
+    console.log(shopItem);
+
     if (cart.has(id))
     {
         cart.get(id).set("quantity", cart.get(id).get("quantity")+1);
@@ -47,10 +58,10 @@ function cartAdd(id, name, image, price, quantity)
     else
     {
         cart.set(id, mapTemplate);
-        cart.get(id).set("name", name);
-        cart.get(id).set("image", image);
-        cart.get(id).set("price", price);
-        cart.get(id).set("quantity", quantity);
+        cart.get(id).set("name", shopItem.getElementsByClassName("shop-item-title")[0].innerText);
+        cart.get(id).set("image", shopItem.getElementsByClassName("shop-item-image")[0].src);
+        cart.get(id).set("price", shopItem.getElementsByClassName("shop-item-price")[0].innerText);
+        cart.get(id).set("quantity", 1);
         addCartDiv(id);
     }
 

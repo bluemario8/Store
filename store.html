@@ -24,7 +24,9 @@
                     <img class="shop-item-image" src="Images/Album 1.png">
                     <div class="shop-item-details">
                         <span class="shop-item-price">$12.99</span>
-                        <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        <button class="btn btn-primary shop-item-button"
+                            onclick="cartAdd('album_1', this)" type="button">ADD TO CART
+                        </button>
                     </div>
                 </div>
                 <div class="shop-item">
@@ -32,7 +34,9 @@
                     <img class="shop-item-image" src="Images/Album 2.png">
                     <div class="shop-item-details">
                         <span class="shop-item-price">$14.99</span>
-                        <button class="btn btn-primary shop-item-button"type="button">ADD TO CART</button>
+                        <button class="btn btn-primary shop-item-button"
+                            onclick="cartAdd('album_2', this)" type="button">ADD TO CART
+                        </button>
                     </div>
                 </div>
                 <div class="shop-item">
@@ -40,7 +44,9 @@
                     <img class="shop-item-image" src="Images/Album 3.png">
                     <div class="shop-item-details">
                         <span class="shop-item-price">$9.99</span>
-                        <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        <button class="btn btn-primary shop-item-button"
+                            onclick="cartAdd('album_3', this)" type="button">ADD TO CART
+                        </button>
                     </div>
                 </div>
                 <div class="shop-item">
@@ -48,7 +54,9 @@
                     <img class="shop-item-image" src="Images/Album 4.png">
                     <div class="shop-item-details">
                         <span class="shop-item-price">$19.99</span>
-                        <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        <button class="btn btn-primary shop-item-button"
+                            onclick="cartAdd('album_4', this)" type="button">ADD TO CART
+                        </button>
                     </div>
                 </div>
             </div>
@@ -61,7 +69,9 @@
                     <img class="shop-item-image" src="Images/Shirt.png">
                     <div class="shop-item-details">
                         <span class="shop-item-price">$19.99</span>
-                        <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        <button class="btn btn-primary shop-item-button"
+                            onclick="cartAdd('t-shirt', this)" type="button">ADD TO CART
+                        </button>
                     </div>
                 </div>
                 <div class="shop-item">
@@ -70,8 +80,7 @@
                     <div class="shop-item-details">
                         <span class="shop-item-price">$6.99</span>
                         <button class="btn btn-primary shop-item-button" 
-                            onClick="cartAdd('coffee_cup', 'Coffee Cup', 
-                                'Images/Cofee.png', '$6.99', 1)" type="button">ADD TO CART
+                            onclick="cartAdd('coffee_cup', this)" type="button">ADD TO CART
                         </button>
                     </div>
                 </div>
@@ -85,7 +94,7 @@
                 <span class="cart-quantity cart-header cart-column">QUANTITY</span>
             </div>
             <div class="cart-items">
-                <div class="cart-row">
+                <!-- <div class="cart-row">
                     <div class="cart-item cart-column">
                         <img class="cart-item-image" src="Images/Shirt.png" width="100" height="100">
                         <span class="cart-item-title">T-Shirt</span>
@@ -95,7 +104,7 @@
                         <input class="cart-quantity-input" type="number" value="1">
                         <button class="btn btn-danger" type="button">REMOVE</button>
                     </div>
-                </div>
+                </div> -->
                 <!-- <div class="cart-row">
                     <div class="cart-item cart-column">
                         <img class="cart-item-image" src="Images/Album 3.png" width="100" height="100">
