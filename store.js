@@ -1,5 +1,5 @@
 let cart = new Map();
-let cartTotal = 0;
+let cartTotal = "0.00";
 const mapTemplate = new Map([["name", ""], ["image", "img.png"], 
                     ["price", "$"], ["quantity", 0]]);
 
@@ -11,10 +11,7 @@ const cartBar = document.body.getElementsByClassName("cart-items")[0];
 // ^^^ test / temporary ^^^
 
 
-function dollarToNum(price) 
-{
-    return Number(price.split("$").pop());
-}
+function dollarToNum(price) { return Number(price.split("$").pop()); }
 
 function makeInnerHTML(id) 
 {
@@ -26,22 +23,53 @@ function makeInnerHTML(id)
             </div>
             <span class="cart-price cart-column">` + cart.get(id).get("price") + `</span>
             <div class="cart-quantity cart-column">
-                <input class="cart-quantity-input" type="number" value="` + cart.get(id).get("quantity") + `">
+                <input class="cart-quantity-input" onchange="updateQuantity(this)" type="number" 
+                value="` + cart.get(id).get("quantity") + `" min="1" max="100">
                 <button class="btn btn-danger" onclick="removeFromCart('` + id + `')" type="button">REMOVE</button>
             </div>
         </div>`;
+}
+
+function calculateTotal() 
+{
+    let total = 0;
+    let cartItems = document.getElementsByClassName("cart-items")[0];
+    let inputs = cartItems.getElementsByClassName("cart-quantity-input");
+    let prices = cartItems.getElementsByClassName("cart-price");
+    let totalElem = document.getElementsByClassName("cart-total-price")[0];
+
+    for (let i = 0; i < inputs.length; i++)
+    {
+        total += parseFloat( ( inputs[i].valueAsNumber * dollarToNum( prices[i].innerText ) ).toFixed(2) );
+    }
+
+    totalElem.innerText = "$" + total.toFixed(2);
+}
+
+function updateQuantity(data) 
+{
+    let quantity = parseInt(data.valueAsNumber);
+    if (quantity > 100)
+        quantity = 100;
+    else if (isNaN(quantity) || quantity < 1)
+        quantity = 1;
+
+    data.value = quantity;
+    calculateTotal();
 }
 
 function removeFromCart(id) 
 {
     document.getElementById(id).remove();
     cart.delete(id);
+    calculateTotal();
 }
 
 function purchase() 
 {
     document.getElementsByClassName("cart-items")[0].innerHTML = "";
     cart = new Map();
+    calculateTotal();
 }
 
 function addCartDiv(id) 
@@ -60,7 +88,6 @@ function updateCartDiv(id)
 
 function cartAdd(id, data) 
 {
-    console.log(data);
     let shopItems = document.getElementsByClassName("shop-item");
     let shopItem = "";
 
@@ -69,7 +96,6 @@ function cartAdd(id, data)
         if (shopItems[index].getElementsByTagName("button")[0] == data)
             shopItem = shopItems[index];
     }
-    console.log(shopItem);
 
     if (cart.has(id))
     {
@@ -86,6 +112,6 @@ function cartAdd(id, data)
         cart.get(id).set("price", shopItem.getElementsByClassName("shop-item-price")[0].innerText);
         cart.get(id).set("quantity", 1);
         addCartDiv(id);
+        calculateTotal();
     }
-
 }
