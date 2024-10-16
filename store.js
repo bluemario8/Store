@@ -42,6 +42,7 @@ function cartAdd(id, data)
     console.log(data);
     let shopItems = document.getElementsByClassName("shop-item");
     let shopItem = "";
+
     for (let index = 0; index < shopItems.length; index++)
     {
         console.log(index);
@@ -50,10 +51,11 @@ function cartAdd(id, data)
     }
     console.log(shopItem);
 
+    let oldText = shopItem.getElementsByClassName("shop-item-button")[0].innerText;
+
     if (cart.has(id))
     {
-        cart.get(id).set("quantity", cart.get(id).get("quantity")+1);
-        updateCartDiv(id);
+        shopItem.getElementsByClassName("shop-item-button")[0].innerText = "ALREADY IN CART";
     }
     else
     {
