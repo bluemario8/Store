@@ -114,4 +114,4 @@ function cartAdd(id, data)
         addCartDiv(id);
         calculateTotal();
     }
-}
+} // test
